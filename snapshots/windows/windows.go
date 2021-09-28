@@ -26,7 +26,6 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
-	"strconv"
 	"strings"
 
 	"github.com/Microsoft/go-winio"
@@ -374,6 +373,7 @@ func (s *snapshotter) createSnapshot(ctx context.Context, kind snapshots.Kind, k
 				o(&snapshotInfo)
 			}
 
+			/*
 			var sizeGB int
 			if sizeGBstr, ok := snapshotInfo.Labels[rootfsSizeLabel]; ok {
 				i32, err := strconv.ParseInt(sizeGBstr, 10, 32)
@@ -381,7 +381,7 @@ func (s *snapshotter) createSnapshot(ctx context.Context, kind snapshots.Kind, k
 					return nil, errors.Wrapf(err, "failed to parse label %q=%q", rootfsSizeLabel, sizeGBstr)
 				}
 				sizeGB = int(i32)
-			}
+			}*/
 
 			var makeUVMScratch bool
 			if _, ok := snapshotInfo.Labels[uvmScratchLabel]; ok {
@@ -394,9 +394,11 @@ func (s *snapshotter) createSnapshot(ctx context.Context, kind snapshots.Kind, k
 					return nil, errors.Wrap(err, "failed to make UVM's scratch layer")
 				}
 			}
+			/*
 			if err := s.createScratchLayer(ctx, snDir, parentLayerPaths, sizeGB); err != nil {
 				return nil, errors.Wrap(err, "failed to create scratch layer")
 			}
+			*/
 		}
 	}
 
